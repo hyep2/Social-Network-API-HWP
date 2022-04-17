@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const { Schema, model }   = require('mongoose')
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -23,13 +23,24 @@ const userSchema = new mongoose.Schema({
   }],
 })
 
+
+const User = model('User', userSchema)
+
 //virtual property friendCount to get number of friends
-User.virtual('friendCount').get(function () {
+userSchema.virtual('friendCount').get(function () {
   return this.friends.length
 })
 
-
-const User = mongoose.model('User', 'userSchema')
+//seeding
+User.create(
+  { username: 'hyep2', email: 'hyewon@gmail.com'},
+  (err, data) => {
+    if (err) {
+      console.error(err);
+    }
+    console.log(data);
+  }
+);
 
 const handleError = (err) => console.error(err)
 

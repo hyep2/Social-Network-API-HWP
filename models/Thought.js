@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
+const { Schema, model }  = require('mongoose')
 
 //subdocument reactionSchema
-const reactionSchema = new mongoose.Schema({
+const reactionSchema = new Schema({
   reactionId: { 
     type: Schema.Types.ObjectId,
     //default value is set ton new ObjectId
@@ -22,7 +22,7 @@ const reactionSchema = new mongoose.Schema({
   }
 })
 
-const thoughtSchema = new mongoose.Schema({
+const thoughtSchema = new Schema({
   thoughtText: { 
     type: String, 
     required: true,
@@ -38,12 +38,26 @@ const thoughtSchema = new mongoose.Schema({
   reactions: [reactionSchema]
 })
 
+
+
+const Thought = model('Thought', thoughtSchema)
+
 //virtual property reactionCount to get number of reactions
-Thought.virtual('reactionCount').get(function () {
+thoughtSchema.virtual('reactionCount').get(function () {
   return this.reactions.length
 })
 
-const Thought = mongoose.model('Thought', 'thoughtSchema')
+//seeding
+Thought.create(
+  { thoughtText: 'just testing it out', username: 'hyep2' },
+  (err, data) => {
+    if (err) {
+      console.error(err);
+    }
+    console.log(data);
+  }
+);
+
 
 const handleError = (err) => console.error(err)
 

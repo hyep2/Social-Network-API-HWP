@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/hyep2/Social-Network-API-HWP/issues"
   },
-  "homepage": "https://github.com/hyep2/Social-Network-API-HWP#readme"
+  "homepage": "https://github.com/hyep2/Social-Network-API-HWP#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.3.0"
+  }
 }
