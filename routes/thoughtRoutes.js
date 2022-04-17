@@ -21,7 +21,7 @@ router.get('/thoughts/:id', async ({ params: { id } }, res) => {
   }
 })
 
-//CREATE NEW THOUGHT AND PLUG TO ASSOCIATED USER
+//CREATE NEW THOUGHT AND PLUG TO ASSOCIATED USER BY USERNAME
 router.post('/thoughts', async ({ body }, res) => {
   try {
     const thought = await Thought.create(body)

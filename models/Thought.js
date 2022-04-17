@@ -1,42 +1,49 @@
-const { Schema, model }  = require('mongoose')
+const { Schema, model } = require('mongoose')
 
 //subdocument reactionSchema
 const reactionSchema = new Schema({
-  reactionId: { 
+  reactionId: {
     type: Schema.Types.ObjectId,
     //default value is set ton new ObjectId
     default: () => new Types.ObjectId()
   },
-  reactionBody: { 
-    type: String, 
+  reactionBody: {
+    type: String,
     required: true,
     maxLength: 280
   },
-  username: { 
-    type: String, 
-    required: true 
+  username: {
+    type: String,
+    required: true
   },
-  createdAt: { 
-    type: Date, 
-    default: Date.now 
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 })
 
-const thoughtSchema = new Schema({
-  thoughtText: { 
-    type: String, 
-    required: true,
-    minLength: 1,
-    maxLength: 280
+const thoughtSchema = new Schema(
+  {
+    thoughtText: {
+      type: String,
+      required: true,
+      minLength: 1,
+      maxLength: 280
+    },
+    createdAt: { type: Date, default: Date.now },
+    username: {
+      type: String,
+      required: true,
+    },
+    //array holding all reactions
+    reactions: [reactionSchema]
   },
-  createdAt: { type: Date, default: Date.now},
-  username: { 
-    type: String,
-    required: true,
-  },
-  //array holding all reactions
-  reactions: [reactionSchema]
-})
+  {
+    toJSON: {
+      virtuals:true
+    }
+  }
+)
 
 
 
