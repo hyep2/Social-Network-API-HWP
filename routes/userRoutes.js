@@ -28,4 +28,23 @@ router.post('/users', async({body}, res)=> {
   }
 })
 
+router.put('/users/:id', async ({ body, params: { id } }, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(id,body)
+    res.json('User info updated')
+  } catch (error) {
+    res.status(500).json({ error })
+  }
+})
+
+router.delete('/users/:id', async ({ params: { id } }, res) => {
+  try {
+    const user = await User.findByIdAndDelete(id)
+    res.json('User deleted')
+  } catch (error) {
+    res.status(500).json({ error })
+  }
+})
+
+
 module.exports = router
