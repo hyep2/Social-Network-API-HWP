@@ -19,4 +19,13 @@ router.get('/users/:id', async({params:{id}}, res)=> {
   }
 })
 
+router.post('/users', async({body}, res)=> {
+  try {
+    const user = await User.create(body)
+    res.json(user)
+  } catch (error) {
+    res.status(500).json({error})
+  }
+})
+
 module.exports = router
