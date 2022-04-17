@@ -1,24 +1,28 @@
 const router = require('express').Router()
 const { User } = require('../models')
 
+
+//GET ALL USERS
 router.get('/users', async (req, res) => {
   try {
-    const users = await User.find({})
+    const users = await User.find({}).populate('thoughts')
     res.json(users)
   } catch (err) {
     res.status(500).json({ err })
   }
 })
 
+//GET SINGLE USER BY ID
 router.get('/users/:id', async({params:{id}}, res)=> {
   try {
-    const user = await User.findById(id)
+    const user = await User.findById(id).populate('thoughts')
     res.json(user)
   } catch (error) {
     res.status(500).json({error})
   }
 })
 
+//CREATE NEW USER
 router.post('/users', async({body}, res)=> {
   try {
     const user = await User.create(body)
@@ -28,6 +32,7 @@ router.post('/users', async({body}, res)=> {
   }
 })
 
+//UPDATE SINGLE USER BY ID
 router.put('/users/:id', async ({ body, params: { id } }, res) => {
   try {
     const user = await User.findByIdAndUpdate(id,body)
@@ -37,6 +42,7 @@ router.put('/users/:id', async ({ body, params: { id } }, res) => {
   }
 })
 
+//DELETE USER BY ID
 router.delete('/users/:id', async ({ params: { id } }, res) => {
   try {
     const user = await User.findByIdAndDelete(id)

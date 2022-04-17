@@ -32,7 +32,7 @@ const thoughtSchema = new Schema({
   createdAt: { type: Date, default: Date.now},
   username: { 
     type: String,
-    required: true
+    required: true,
   },
   //array holding all reactions
   reactions: [reactionSchema]
