@@ -1,7 +1,10 @@
 const express = require('express');
 const db = require('./config/connection');
-// Require model
-const { User, Thought } = require('./models');
+const routes = require('./routes')
+
+
+// // Require model
+// const { User, Thought } = require('./models');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -9,6 +12,7 @@ const app = express();
 //middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(routes)
 
 
 db.once('open', () => {
