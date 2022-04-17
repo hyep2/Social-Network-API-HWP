@@ -23,6 +23,12 @@ const userSchema = new mongoose.Schema({
   }],
 })
 
+//virtual property friendCount to get number of friends
+User.virtual('friendCount').get(function () {
+  return this.friends.length
+})
+
+
 const User = mongoose.model('User', 'userSchema')
 
 const handleError = (err) => console.error(err)
