@@ -5,7 +5,7 @@ const { User } = require('../models')
 //GET ALL USERS
 router.get('/users', async (req, res) => {
   try {
-    const users = await User.find({}).populate('thoughts')
+    const users = await User.find({}).populate('thoughts').populate('friends')
     res.json(users)
   } catch (err) {
     res.status(500).json({ err })
@@ -15,7 +15,7 @@ router.get('/users', async (req, res) => {
 //GET SINGLE USER BY ID
 router.get('/users/:id', async({params:{id}}, res)=> {
   try {
-    const user = await User.findById(id).populate('thoughts')
+    const user = await User.findById(id).populate('thoughts').populate('friends')
     res.json(user)
   } catch (error) {
     res.status(500).json({error})
