@@ -1,26 +1,34 @@
 const { Schema, model } = require('mongoose')
 
 //subdocument reactionSchema
-const reactionSchema = new Schema({
-  reactionId: {
-    type: Schema.Types.ObjectId,
-    //default value is set ton new ObjectId
-    default: () => new Types.ObjectId()
+const reactionSchema = new Schema(
+  {
+    reactionId: {
+      type: Schema.Types.ObjectId,
+      //default value is set to new ObjectId
+      default: () => new Types.ObjectId()
+    },
+    reactionBody: {
+      type: String,
+      required: true,
+      maxLength: 280
+    },
+    username: {
+      type: String,
+      required: true
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now
+    }
   },
-  reactionBody: {
-    type: String,
-    required: true,
-    maxLength: 280
-  },
-  username: {
-    type: String,
-    required: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  {
+    toJSON: {
+      getters: true
+    },
+    id: false
   }
-})
+)
 
 const thoughtSchema = new Schema(
   {
@@ -40,7 +48,7 @@ const thoughtSchema = new Schema(
   },
   {
     toJSON: {
-      virtuals:true
+      virtuals: true
     },
     id: false
   }

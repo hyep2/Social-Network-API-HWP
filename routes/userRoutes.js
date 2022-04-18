@@ -56,13 +56,12 @@ router.delete('/users/:id', async ({ params: { id } }, res) => {
 //ADD NEW FRIEND TO USER'S FRIEND LIST
 router.post('/users/:id/friends/:friendId', async({ params: {id, friendId}}, res) => {
   try {
-    res.json('Friend successfully added')
-    return User.findByIdAndUpdate( 
+    await User.findByIdAndUpdate( 
       { _id: id,},
       { $push:{friends: friendId}},
       { new: true}
     )
-
+    res.json('Friend successfully added')
   } catch (error) {
     res.status(500).json({err})
   }
@@ -71,13 +70,12 @@ router.post('/users/:id/friends/:friendId', async({ params: {id, friendId}}, res
 //REMOVE FRIEND FROM USER'S FRIEND LIST
 router.delete('/users/:id/friends/:friendId', async ({ params: { id, friendId } }, res) => {
   try {
-    res.json('Friend successfully deleted')
-    return User.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       { _id: id, },
       { $pull: { friends: friendId } },
       { new: true }
     )
-
+    res.json('Friend successfully deleted')
   } catch (error) {
     res.status(500).json({ err })
   }

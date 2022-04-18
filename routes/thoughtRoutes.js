@@ -57,4 +57,36 @@ router.delete('/thoughts/:id', async ({ params: { id } }, res) => {
   }
 })
 
+//REACTIONS
+//create reaction stored in a single thought's reactions array field
+router.post('/thoughts/:id/reactions', async ({ body, params: { id } }, res) => {
+  try {
+    await Thought.findByIdAndUpdate(
+      { _id: id, },
+      { $push: { reactions: body } },
+      { new: true }
+    )
+    res.json('Reaction successfully added')
+    
+  } catch (error) {
+    res.status(500).json({ err })
+  }
+})
+
+
+//delete to pull and remove rxn by the reaction's reaction ID
+router.delete('/thoughts/:id/reactions/:reactionId', async ({ params: { id, reactionId } }, res) => {
+  try {
+    await Thought.findOneAndUpdate(
+      { _id: id, },
+      { $pull: { reactions: { _id: reactionId } }},
+      { runValidators: true, new: true }
+    )
+    res.json('Reaction successfully deleted')
+
+  } catch (error) {
+    res.status(500).json({ error })
+  }
+})
+
 module.exports = router
