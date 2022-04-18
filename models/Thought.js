@@ -55,15 +55,15 @@ thoughtSchema.virtual('reactionCount').get(function () {
 })
 
 //seeding
-Thought.create(
-  { thoughtText: 'just testing it out', username: 'hyep2' },
-  (err, data) => {
-    if (err) {
-      console.error(err);
-    }
-    console.log(data);
-  }
-);
+// Thought.create(
+//   { thoughtText: 'just testing it out', username: 'hyep2' },
+//   (err, data) => {
+//     if (err) {
+//       console.error(err);
+//     }
+//     console.log(data);
+//   }
+// );
 
 
 const handleError = (err) => console.error(err)

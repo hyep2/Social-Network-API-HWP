@@ -37,4 +37,24 @@ router.post('/thoughts', async ({ body }, res) => {
   }
 })
 
+//UPDATE SINGLE THOUGHT BY ID
+router.put('/thoughts/:id', async ({ body, params: { id } }, res) => {
+  try {
+    const thought = await Thought.findByIdAndUpdate(id, body)
+    res.json('Thought updated')
+  } catch (error) {
+    res.status(500).json({ error })
+  }
+})
+
+//DELETE THOUGHT BY ID
+router.delete('/thoughts/:id', async ({ params: { id } }, res) => {
+  try {
+    const thought = await Thought.findByIdAndDelete(id)
+    res.json('Thought deleted')
+  } catch (error) {
+    res.status(500).json({ error })
+  }
+})
+
 module.exports = router

@@ -52,5 +52,23 @@ router.delete('/users/:id', async ({ params: { id } }, res) => {
   }
 })
 
+//FRIENDS
+//ADD NEW FRIEND TO USER'S FRIEND LIST
+router.post('/users/:id/friends/:friendId', async({ params: {id, friendId}}, res) => {
+  try {
+    res.json('Friend successfully added')
+    return User.findByIdAndUpdate( 
+      { _id: id,},
+      { $push:{friends: friendId}},
+      { new: true}
+    )
+
+  } catch (error) {
+    res.status(500).json({err})
+  }
+})
+
+//REMOVE FRIEND FROM USER'S FRIEND LIST
+
 
 module.exports = router

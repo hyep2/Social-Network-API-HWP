@@ -39,15 +39,15 @@ userSchema.virtual('friendCount').get(function () {
 })
 
 //seeding
-User.create(
-  { username: 'hyep2', email: 'hyewon@gmail.com' },
-  (err, data) => {
-    if (err) {
-      console.error(err);
-    }
-    console.log(data);
-  }
-);
+// User.create(
+//   { username: 'hyep2', email: 'hyewon@gmail.com' },
+//   (err, data) => {
+//     if (err) {
+//       console.error(err);
+//     }
+//     console.log(data);
+//   }
+// );
 
 const handleError = (err) => console.error(err)
 
