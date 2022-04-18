@@ -69,6 +69,18 @@ router.post('/users/:id/friends/:friendId', async({ params: {id, friendId}}, res
 })
 
 //REMOVE FRIEND FROM USER'S FRIEND LIST
+router.delete('/users/:id/friends/:friendId', async ({ params: { id, friendId } }, res) => {
+  try {
+    res.json('Friend successfully deleted')
+    return User.findByIdAndUpdate(
+      { _id: id, },
+      { $pull: { friends: friendId } },
+      { new: true }
+    )
 
+  } catch (error) {
+    res.status(500).json({ err })
+  }
+})
 
 module.exports = router
